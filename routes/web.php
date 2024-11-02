@@ -28,4 +28,34 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth' , 'role:admin'])->group(function () {
+    Route::name('admin.')->group(function () {
+        Route::prefix('admin')->group(function () {
+            Route::get('index',[App\Http\Controllers\Admin\AdminController::class, 'index'] )->name('index');
+        });
+    });
+});
+
+
+Route::middleware(['auth' , 'role:hirafi'])->group(function () {
+    Route::name('hirafi.')->group(function () {
+        Route::prefix('hirafi')->group(function () {
+            Route::get('index',[App\Http\Controllers\Hirafi\HirafiController::class, 'index'] )->name('index');
+        });
+    });
+});
+
+Route::middleware(['auth' , 'role:user'])->group(function () {
+    Route::name('user.')->group(function () {
+        Route::prefix('user')->group(function () {
+            Route::get('index',[App\Http\Controllers\User\UserController::class, 'index'] )->name('index');
+        });
+    });
+});
+
+
+Route::prefix('/')->group(function () {
+    Route::get('', function () { return view('all.main'); });
+});
+
 require __DIR__.'/auth.php';

@@ -15,7 +15,7 @@ class dashboardController extends Controller
         } elseif (Auth::user()->role == 'hirafi') {
             return redirect()->route('hirafi.index');
         } elseif (Auth::user()->role == 'user') {
-            return redirect()->route('user.index');
+            return redirect()->route('user.main');
         }
 
         return view('dashboard');

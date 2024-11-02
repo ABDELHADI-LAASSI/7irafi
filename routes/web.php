@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\WebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('all.main');
+})->name('main')->middleware('user_and_guest');
+
+Route::get('/dashboard', [App\Http\Controllers\Dashboard\dashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -55,7 +58,7 @@ Route::middleware(['auth' , 'role:user'])->group(function () {
 
 
 Route::prefix('/')->group(function () {
-    Route::get('', function () { return view('all.main'); });
+    Route::get('user', function () { return view('user.index'); })->name('user.main');
 });
 
 require __DIR__.'/auth.php';

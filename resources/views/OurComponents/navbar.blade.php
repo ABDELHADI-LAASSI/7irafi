@@ -51,6 +51,8 @@
                             </form>
                         </li>
                     </ul>
+                   
+
                 @endauth
             </div>
         </div>
@@ -121,6 +123,11 @@
                 box-shadow: 0px 0px 15px whitesmoke;
                 position: relative;
                 direction: rtl;
+            }
+            @media (max-width: 768px) {
+                .header .container {
+
+                }
             }
 
             .header .container {
@@ -219,6 +226,7 @@
             .icon {
                 font-size: 20px;
             }
+
 
             @media (max-width:767px) {}
         </style>

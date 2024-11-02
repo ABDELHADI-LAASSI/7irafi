@@ -34,7 +34,7 @@ class VerifyEmailController extends Controller
         } elseif ($user->role == 'hirafi') {
             return redirect()->route('hirafi.index');
         } elseif ($user->role == 'user') {
-            return redirect()->route('main');
+            return redirect()->route('user.main');
         }
 
         return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');

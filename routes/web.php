@@ -56,8 +56,7 @@ Route::middleware(['auth' , 'role:user'])->group(function () {
 
 
 Route::prefix('/')->group(function () {
-    Route::get('', function () { return view('welcome'); });
-    Route::get('all' , [WebController::class , 'index']);
+    Route::get('', function () { return view('all.main'); });
 });
 
 

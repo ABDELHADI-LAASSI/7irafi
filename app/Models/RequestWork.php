@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class RequestWork extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'hirafi_id',
+        'description',
+        'status',
+    ];
 }

@@ -1,1 +1,3 @@
-<h1>main page</h1>
+@include('OurComponents.navbar')
+
+

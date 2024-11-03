@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\WebController;
@@ -57,7 +58,7 @@ Route::middleware(['auth' , 'role:user'])->group(function () {
 
 
 Route::prefix('/')->group(function () {
-    Route::get('', function () { return view('all.main');})->name('main');
+    Route::get('', [MainController::class, 'getAcceuil'])->name('main');
     Route::get('user', function () { return view('user.index'); })->name('user.main');
 });
 

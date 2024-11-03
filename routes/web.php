@@ -15,9 +15,8 @@ use App\Http\Controllers\Web\WebController;
 |
 */
 
-Route::get('/', function () {
-    return view('all.main');
-})->name('main')->middleware('user_and_guest');
+Route::get('/', function () { return view('all.main');})->name('main')->middleware('user_and_guest');
+
 
 Route::get('/dashboard', [App\Http\Controllers\Dashboard\dashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');;
 
@@ -58,6 +57,7 @@ Route::middleware(['auth' , 'role:user'])->group(function () {
 
 
 Route::prefix('/')->group(function () {
+    Route::get('', function () { return view('all.main');})->name('main');
     Route::get('user', function () { return view('user.index'); })->name('user.main');
 });
 

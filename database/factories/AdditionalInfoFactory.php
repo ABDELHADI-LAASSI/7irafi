@@ -1,0 +1,35 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AdditionalInfo>
+ */
+class AdditionalInfoFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'user_id' => User::all()->random()->id,
+            'address' => $this->faker->address,
+            'phone_number' => $this->faker->phoneNumber,
+            'image' => $this->faker->imageUrl(),
+            'rating' => $this->faker->optional()->randomFloat(1, 0, 5), // Optional rating
+            'hirfa' => $this->faker->word,
+            'date_of_birth' => $this->faker->date(),
+            'gender' => $this->faker->randomElement(['male', 'female']),
+            'city' => $this->faker->city,
+            'availability' => $this->faker->boolean,
+            'CIN' => $this->faker->word, // Change as per your requirements
+            'biography' => $this->faker->paragraph,
+        ];
+    }
+}

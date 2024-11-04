@@ -22,11 +22,11 @@
             </div>
 
             <div class="posts">
-                
+
                 @foreach ($posts as $post)
-                
+
                     <div class="post">
-    
+
                         <div class="post_head">
                             <div class="post_user">
                                 <div>
@@ -51,23 +51,23 @@
                                     <button>إزالة من المحفوظات</button>
                                 </form>
                             @endif
-                            
+
                                 @endauth
                             </div>
-                            
+
                         </div>
-    
+
                         <div class="post_body">
                             <p>{{ $post->description }}</p>
                             {{-- <img src="{{ $post->image }}" alt="{{ $post->title }}"> --}}
                             <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" alt="">
                         </div>
-    
+
                         <div class="post_footer">
                             <div class="post_infos">
                                 <div class="likes">
                                     <p>{{ $post->likes->count() }} إعجاب</p>
-                                    
+
                                     @auth
                                         @if ($post->liked == false)
                                             <form action="{{ route('like.post', ['post' => $post->id, 'user' => auth()->user()->id]) }}" method="POST">
@@ -81,19 +81,19 @@
                                                 <button>ازالة الاعجاب</button>
                                             </form>
                                         @endif
-    
+
                                     @endauth
-    
+
                                 </div>
                                 <p>{{ $post->comments->count() }} تعليق</p>
-                            </div>  
-    
+                            </div>
+
                             <div class="post_buttons">
                                 <button class="comments_btn" data-post-id="{{ $post->id }}">اظهار التعليقات</button>
-                            </div> 
-                            
+                            </div>
+
                             <div class="comments" style="display: none;">
-                                
+
                                 <div class="comments_list">
                                     @foreach ($post->comments as $comment)
                                     <div class="comment">
@@ -108,7 +108,7 @@
                                         <div class="comment_body">
                                             <p>{{ $comment->content }}</p>
                                         </div>
-                                        
+
                                     </div>
                                     @endforeach
                                 </div>
@@ -117,15 +117,15 @@
                                     <button>اضافة تعليق</button>
                                     <input name="content" type="text">
                                 </form>
-                            </div>                      
-                            
-                                      
+                            </div>
+
+
                         </div>
-    
+
                     </div>
-    
+
                 @endforeach
-        
+
             </div>
 
             <div class="side_links">

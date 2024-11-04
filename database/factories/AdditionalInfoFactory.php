@@ -17,13 +17,27 @@ class AdditionalInfoFactory extends Factory
      */
     public function definition(): array
     {
+        // Define an array of 10 Arabic professions (7iraf)
+        $hiraf = [
+            'نجار', // Carpenter
+            'حداد', // Blacksmith
+            'كهربائي', // Electrician
+            'سباك', // Plumber
+            'مزارع', // Farmer
+            'نجار', // Carpenter
+            'ميكانيكي', // Mechanic
+            'حلاق', // Barber
+            'خياط', // Tailor
+            'خباز'  // Baker
+        ];
+
         return [
             'user_id' => User::all()->random()->id,
             'address' => $this->faker->address,
             'phone_number' => $this->faker->phoneNumber,
             'image' => $this->faker->imageUrl(),
             'rating' => $this->faker->optional()->randomFloat(1, 0, 5), // Optional rating
-            'hirfa' => $this->faker->word,
+            'hirfa' => $this->faker->randomElement($hiraf),
             'date_of_birth' => $this->faker->date(),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'city' => $this->faker->city,

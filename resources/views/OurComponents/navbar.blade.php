@@ -96,7 +96,7 @@
             /* Large */
             @media (min-width: 1200px) {
                 .container {
-                    width: 1170px;
+                    width: 1300px;
                 }
             }
 

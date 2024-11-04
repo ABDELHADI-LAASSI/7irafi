@@ -19,7 +19,6 @@ class PostFactory extends Factory
     {
         return [
             'user_id' => User::whereIn('role', ['user', 'hirafi'])->inRandomOrder()->first()->id,
-            'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'image' => $this->faker->imageUrl(),
             'date_posted' => now(),

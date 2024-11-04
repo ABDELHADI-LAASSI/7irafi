@@ -21,7 +21,7 @@ class AdditionalInfoFactory extends Factory
             'user_id' => User::all()->random()->id,
             'address' => $this->faker->address,
             'phone_number' => $this->faker->phoneNumber,
-            'image' => $this->faker->imageUrl(),
+            'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCevVbi_1eUp1UaHjKO0AYUSEViJvIvjkTWwSdjwBoc8YZUR3cOiJHa8OX-brtOQ5IBuY&usqp=CAU',
             'rating' => $this->faker->optional()->randomFloat(1, 0, 5), // Optional rating
             'hirfa' => $this->faker->word,
             'date_of_birth' => $this->faker->date(),

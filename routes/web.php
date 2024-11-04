@@ -62,4 +62,12 @@ Route::prefix('/')->group(function () {
     Route::get('user', function () { return view('user.index'); })->name('user.main');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::post('/like/{post}/{user}', [App\Http\Controllers\LikeController::class, 'post'])->name('like.post');
+    Route::delete('/like/{post}/{user}', [App\Http\Controllers\LikeController::class, 'delete'])->name('like.delete');
+    Route::post('/comment/{post}', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
+    Route::post('/save/{post}', [App\Http\Controllers\SaveController::class, 'post'])->name('save.post');
+    Route::delete('/save/{post}', [App\Http\Controllers\SaveController::class, 'delete'])->name('save.delete');
+});
+
 require __DIR__.'/auth.php';

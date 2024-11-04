@@ -5,23 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdditionalInfo extends Model
+class Like extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'address',
-        'phone_number',
-        'image',
-        'rating',
-        'hirfa',
-        'date_of_birth',
-        'gender',
-        'city',
-        'availability',
-        'CIN',
-        'biography',
+        'post_id',
     ];
 
     public function user()
@@ -29,4 +19,8 @@ class AdditionalInfo extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }

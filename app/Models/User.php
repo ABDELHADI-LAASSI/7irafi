@@ -24,6 +24,36 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
     ];
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function infos()
+    {
+        return $this->hasOne(AdditionalInfo::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'likes');
+    }
+
+    public function saves()
+    {
+        return $this->hasMany(Save::class);
+    }
+
+    // Define the relationship to Post through Save (for posts saved by the user)
+    public function savedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'saves');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

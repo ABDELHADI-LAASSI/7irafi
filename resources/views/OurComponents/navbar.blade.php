@@ -3,8 +3,8 @@
             <div class="container">
                 <a href="#" class="logo">Elzero</a>
                 <ul class="main-nav">
-                    <li><a href="#الرئيسية">الرئيسية</a></li>
-                    <li><a href="#الحرف">الحرف</a></li>
+                    <li><a href="{{route('main')}}">الرئيسية</a></li>
+                    <li><a href="{{route('hirafiyine')}}">الحرف</a></li>
                 </ul>
                 @guest
                     <ul style="display: flex; align-items: center; justify-content: center ; gap: 20px">
@@ -32,7 +32,7 @@
                             </form>
                         </li>
                     </ul>
-                   
+
 
                 @endauth
             </div>

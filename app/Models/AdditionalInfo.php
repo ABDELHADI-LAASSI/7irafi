@@ -23,4 +23,9 @@ class AdditionalInfo extends Model
         'CIN',
         'biography',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

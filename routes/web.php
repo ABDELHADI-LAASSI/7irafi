@@ -59,7 +59,9 @@ Route::middleware(['auth' , 'role:user'])->group(function () {
 
 Route::prefix('/')->group(function () {
     Route::get('', [MainController::class, 'getAcceuil'])->name('main');
+    Route::get('hirafiyine', [mainController::class, 'getHirafiyine'])->name('hirafiyine');
     Route::get('user', function () { return view('user.index'); })->name('user.main');
 });
+
 
 require __DIR__.'/auth.php';

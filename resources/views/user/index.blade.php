@@ -1,1 +1,3 @@
-@include('OurComponents.navbar')
+<h1>
+    User Dashboard
+</h1>

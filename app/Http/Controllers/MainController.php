@@ -66,13 +66,28 @@ class MainController extends Controller
     public function getProfile()
     {
 
+        if (Auth::check()) {
+            $user = Auth::user();
+            return view('all.profile' , compact('user'));
+        }
+            
+        
+
+    }
+
+    public function sendUserToDashboard(){
         if (!Auth::check()) {
             return redirect('/login');
         } else {
             $user = Auth::user();
-            return view('all.profile' , compact('user'));
+            if ($user->role == 'hirafi') {
+                return redirect()->route('hirafi.index');
+            } elseif ($user->role == 'admin') {
+                return redirect()->route('admin.index');
+            } elseif ($user->role == 'user') {
+                return redirect()->route('main');
+            }
         }
-
     }
 
 

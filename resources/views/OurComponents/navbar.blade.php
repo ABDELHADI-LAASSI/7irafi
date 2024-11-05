@@ -5,7 +5,7 @@
                 <ul class="main-nav">
                     <li><a href="{{route('main')}}">الرئيسية</a></li>
                     <li><a href="{{route('hirafiyine')}}">الحرفيين</a></li>
-                    <li><a href="{{route('profile')}}"> profile </a></li>
+                    <li><a href="{{route('dashboard')}}"> فضائي الخاص </a></li>
                 </ul>
                 @guest
                     <ul style="display: flex; align-items: center; justify-content: center ; gap: 20px">
@@ -32,7 +32,7 @@
                                 </button>
                             </form>
                         </li>
-                    </ul>
+                    </ul>   
 
 
                 @endauth

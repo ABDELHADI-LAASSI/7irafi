@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\WebController;
 
@@ -26,6 +27,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/profile', [MainController::class, 'getProfile'])->name('profile');
+    Route::post('/profile', [UserController::class, 'update'])->name('profile.updateInfo');
+    Route::post('/profile/changePassword', [UserController::class, 'updatePassword'])->name('profile.updatePassword');
+    Route::delete('profile' , [UserController::class, 'removeAccount'])->name('profile.deleteProfile');
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -61,7 +66,7 @@ Route::prefix('/')->group(function () {
     Route::get('', [MainController::class, 'getAcceuil'])->name('main');
     Route::get('hirafiyine', [mainController::class, 'getHirafiyine'])->name('hirafiyine');
     Route::get('user', function () { return view('user.index'); })->name('user.main');
-    Route::get('profile', [MainController::class, 'getProfile'])->name('profile');
+    Route::get('dashboard' , [MainController::class, 'sendUserToDashboard'])->name('dashboard');
 });
 
 

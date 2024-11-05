@@ -26,9 +26,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['auth' , 'role:admin'])->group(function () {
@@ -61,9 +61,10 @@ Route::prefix('/')->group(function () {
     Route::get('', [MainController::class, 'getAcceuil'])->name('main');
     Route::get('hirafiyine', [mainController::class, 'getHirafiyine'])->name('hirafiyine');
     Route::get('user', function () { return view('user.index'); })->name('user.main');
+    Route::get('profile', [MainController::class, 'getProfile'])->name('profile');
 });
 
-<<<<<<< HEAD
+
 Route::middleware('auth')->group(function () {
     Route::post('/like/{post}/{user}', [App\Http\Controllers\LikeController::class, 'post'])->name('like.post');
     Route::delete('/like/{post}/{user}', [App\Http\Controllers\LikeController::class, 'delete'])->name('like.delete');
@@ -71,7 +72,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/save/{post}', [App\Http\Controllers\SaveController::class, 'post'])->name('save.post');
     Route::delete('/save/{post}', [App\Http\Controllers\SaveController::class, 'delete'])->name('save.delete');
 });
-=======
->>>>>>> 13cf60d59133cb40813c4f9568def04df29e369c
 
 require __DIR__.'/auth.php';

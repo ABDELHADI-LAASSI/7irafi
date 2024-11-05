@@ -64,5 +64,17 @@ class MainController extends Controller
         return view('all.hirafiyine', compact('hiraf', 'allHiraf', 'selectedHirfa'));
     }
 
+    public function getProfile()
+    {
+
+        if (!Auth::check()) {
+            return redirect('/login');
+        } else {
+            $user = Auth::user();
+            return view('all.profile' , compact('user'));
+        }
+
+    }
+
 
 }

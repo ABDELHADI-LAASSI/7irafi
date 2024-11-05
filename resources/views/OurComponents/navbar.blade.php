@@ -4,7 +4,7 @@
                 <a href="#" class="logo">Elzero</a>
                 <ul class="main-nav">
                     <li><a href="{{route('main')}}">الرئيسية</a></li>
-                    <li><a href="{{route('hirafiyine')}}">الحرف</a></li>
+                    <li><a href="{{route('hirafiyine')}}">الحرفيين</a></li>
                     <li><a href="{{route('profile')}}"> profile </a></li>
                 </ul>
                 @guest

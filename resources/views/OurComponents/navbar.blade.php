@@ -5,6 +5,7 @@
                 <ul class="main-nav">
                     <li><a href="{{route('main')}}">الرئيسية</a></li>
                     <li><a href="{{route('hirafiyine')}}">الحرفيين</a></li>
+                    <li><a href="{{route('dashboard')}}"> فضائي الخاص </a></li>
                 </ul>
                 @guest
                     <ul style="display: flex; align-items: center; justify-content: center ; gap: 20px">
@@ -14,7 +15,7 @@
                 @endguest
                 @auth
                     <ul style="display: flex; align-items: center; justify-content: center ; gap: 20px">
-                        <li><a href="{{ route('profile.edit') }}"> <button class="button">
+                        <li><a href="{{ route('profile') }}"> <button class="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                         stroke-width="0" fill="currentColor" stroke="currentColor" class="icon">
                                         <path
@@ -31,7 +32,7 @@
                                 </button>
                             </form>
                         </li>
-                    </ul>
+                    </ul>   
 
 
                 @endauth

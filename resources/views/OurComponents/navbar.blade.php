@@ -1,7 +1,7 @@
 
         <div class="header" id="header">
             <div class="container">
-                <a href="#" class="logo">Elzero</a>
+                <img src="{{asset('images/hirfa logo.png')}}" alt="logo" class="logo">
                 <ul class="main-nav">
                     <li><a href="{{route('main')}}">الرئيسية</a></li>
                     <li><a href="{{route('hirafiyine')}}">الحرفيين</a></li>

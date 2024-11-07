@@ -121,10 +121,6 @@
         direction: rtl;
     }
 
-    @media (max-width: 768px) {
-        .header .container {}
-    }
-
     .header .container {
         display: flex;
         flex-wrap: wrap;
@@ -302,7 +298,6 @@
         subMenu.classList.toggle("open-menu");
     }
 </script>
+    
+ </html>
 
-
-
-</html>

@@ -66,6 +66,8 @@ class MainController extends Controller
     public function getProfile()
     {
 
+        
+
         if (Auth::check()) {
             $user = Auth::user();
             return view('all.profile' , compact('user'));

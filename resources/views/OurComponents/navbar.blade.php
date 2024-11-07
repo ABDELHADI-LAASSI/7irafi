@@ -1,6 +1,6 @@
 
         <div class="header" id="header">
-            <div class="container">
+            <div class="containerNav">
                 <a href="#" class="logo">Elzero</a>
                 <ul class="main-nav">
                     <li><a href="{{route('main')}}">الرئيسية</a></li>
@@ -73,30 +73,29 @@
                 padding: 0;
             }
 
-            .container {
+            .containerNav {
                 padding-left: 15px;
                 padding-right: 15px;
-                margin-left: auto;
-                margin-right: auto;
+                width: 100%;
             }
 
             /* Small */
             @media (min-width: 768px) {
-                .container {
+                .containerNav {
                     width: 750px;
                 }
             }
 
             /* Medium */
             @media (min-width: 992px) {
-                .container {
+                .containerNav {
                     width: 970px;
                 }
             }
 
             /* Large */
             @media (min-width: 1200px) {
-                .container {
+                .containerNav {
                     width: 1300px;
                 }
             }
@@ -107,18 +106,19 @@
                 direction: rtl;
             }
             @media (max-width: 768px) {
-                .header .container {
+                .header .containerNav {
 
                 }
             }
 
-            .header .container {
+            .header .containerNav {
+                width: 100%;
                 display: flex;
-                flex-wrap: wrap;
                 justify-content: space-between;
+                
             }
 
-            .header .container .logo {
+            .header .containerNav .logo {
                 display: flex;
                 align-items: center;
                 justify-content: center;

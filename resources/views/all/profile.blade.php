@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="profile">
-{{-- 
+{{--
             @if ($errors->any())
                 <div class="alert alert-danger" role="alert">
                     <ul>
@@ -37,7 +37,9 @@
                         <p style="color: red;" class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+                @if ($user->infos && $user->infos->image)
                 <img width="100" src="{{asset('storage/'.$user->infos->image)}}" alt="">
+                @endif
 
                 {{-- <div class="form-group" style="margin-bottom: 1.5rem; width: 90%">
                     <label for="Email">البريد الإلكتروني</label>
@@ -92,7 +94,7 @@
                         @enderror
                     </div>
                 @endif
-                    
+
 
                 <div class="form-group" style="margin-bottom: 1.5rem; width: 90%">
                     <label for="Date Of birth">تاريخ الميلاد</label>
@@ -139,7 +141,7 @@
                         <p style="color: red;" class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-                
+
 
                 <div class="form-group" style="margin-bottom: 1.5rem; width: 90%">
                     <label for="Bigraphy">السيرة الذاتية</label>
@@ -263,6 +265,6 @@
             margin-bottom: 3rem
         }
 
-        
+
     </style>
 @endsection

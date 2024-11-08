@@ -1,39 +1,52 @@
-
 <div class="header" id="header">
     <div class="container">
-        <img src="{{asset('images/hirfa logo.png')}}" alt="logo" class="logo">
+        <img src="{{ asset('images/hirfa logo.png') }}" alt="logo" class="logo">
         <ul class="main-nav">
-            <li><a href="{{route('main')}}">الرئيسية</a></li>
-            <li><a href="{{route('hirafiyine')}}">الحرفيين</a></li>
+            <li><a href="{{ route('main') }}">الرئيسية</a></li>
+            <li><a href="{{ route('hirafiyine') }}">الحرفيين</a></li>
+            <li><a href="{{ route('dashboard') }}">فضائي الخاص</a></li>
         </ul>
+
         @guest
-            <ul style="display: flex; align-items: center; justify-content: center ; gap: 20px">
+            <ul style="display: flex; align-items: center; justify-content: center; gap: 20px">
                 <li><a href="{{ route('login') }}" class="login">تسجيل الدخول</a></li>
                 <li><a href="{{ route('register') }}" class="register">إنشاء حساب</a></li>
             </ul>
         @endguest
+
         @auth
-            <ul style="display: flex; align-items: center; justify-content: center ; gap: 20px">
-                <li><a href=""> <button class="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
-                                stroke-width="0" fill="currentColor" stroke="currentColor" class="icon">
-                                <path
-                                    d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z">
-                                </path>
-                            </svg>
-                        </button> <i class="fi fi-rs-user"></i> </a></li>
+            <ul style="display: flex; align-items: center; justify-content: center; gap: 20px">
                 <li>
-                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="logout"
-                            style="background: rgb(228, 52, 52); border: none; color: white; cursor: pointer; padding: 10px;border-radius: 7px;">
-                            تسجيل الخروج
-                        </button>
-                    </form>
+                    @if (Auth::user()->infos && Auth::user()->infos->image)
+                        <img src="{{ asset('storage/' . Auth::user()->infos->image) }}" alt="profile image" id="profile_image"
+                            class="profile_image" onclick="toggleMenu()">
+                    @else
+                        <img src="{{ asset('images/profile_image.png') }}" alt="profile image" id="profile_image"
+                            class="profile_image" onclick="toggleMenu()">
+                    @endif
                 </li>
+                <div class="sub-menu-wrap" id="subMenu">
+                    <div class="sub-menu">
+                        <div class="user-info">
+                            @if (Auth::user()->infos && Auth::user()->infos->image)
+                                <img src="{{ asset('storage/' . Auth::user()->infos->image) }}" alt="profile image"
+                                    class="profile_image">
+                            @else
+                                <img src="{{ asset('images/profile_image.png') }}" alt="profile image"
+                                    class="profile_image">
+                            @endif
+                            <h3>{{ Auth::user()->name }}</h3>
+
+                        </div>
+                        <hr>
+                        <ul class="sub-menu-link">
+                            <li class="d-flex   "><i class="fa-solid fa-user d-flex align-items-center"></i><a href="{{ route('profile') }}"  class="me-2">ملفى الشخصى</a> </li>
+                            <li class="d-flex   "><i class="fa-solid fa-right-from-bracket d-flex align-items-center"></i><a href="{{ route('logout') }}" class="me-2">تسجيل الخروج</a></li>
+                            <li class="d-flex   "><i class="fa-solid fa-bookmark d-flex align-items-center"><a href="" class="me-2"> </i>المنشورات المحفوظة</a></li>
+                        </ul>
+                    </div>
+                </div>
             </ul>
-
-
         @endauth
     </div>
 </div>
@@ -100,22 +113,23 @@
         }
     }
 
-    .header {
-        box-shadow: 0px 0px 15px whitesmoke;
-        position: relative;
-        direction: rtl;
-    }
-    @media (max-width: 768px) {
-        .header .container {
+            .header {
+                box-shadow: 0px 0px 15px whitesmoke;
+                position: relative;
+                direction: rtl;
+            }
+            @media (max-width: 768px) {
+                .header .containerNav {
 
-        }
-    }
+                }
+            }
 
-    .header .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
+            .header .containerNav {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                
+            }
 
     .header .container .logo {
         display: flex;
@@ -208,10 +222,81 @@
         font-size: 20px;
     }
 
+    .profile_image {
+        width: 43px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
 
-    @media (max-width:767px) {}
-</style>
+    .sub-menu-wrap {
+        position: absolute;
+        top: 80%;
+        left: 50px;
+        width: 250px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+        z-index: 1;
+    }
+
+    .sub-menu-wrap.open-menu {
+        max-height: 400px;
+        /* or any max height suitable for your content */
+    }
+
+    .sub-menu {
+        background: #f7f6f6;
+        padding: 20px 12px;
+        margin: 10px;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .sub-menu hr {
+        border: 0;
+        height: 1px;
+        width: 100%;
+        background: #ccc;
+        margin: 15px 0 10px;
+    }
+
+    .sub-menu .user-info p {
+        width: 100%;
+    }
+
+    .sub-menu .user-info p b {
+        color: #0e0d0d;
+        margin-left: 10px;
+    }
+
+    .sub-menu a {
+        display: block;
+        text-decoration: none;
+        color: #0e0d0d;
+        margin: 12px 0;
+    }
+
+    .sub-menu a:hover {
+        color: var(--main-color);
+    }
+
+    .sub-menu .logout {
+        color: #e74c3c;
+    }
+
+    .sub-menu .logout:hover {
+        color: #0e0d0d;
+    }
 
 
 
-</html>
+            @media (max-width:767px) {}
+        </style>
+
+
+
+    </html>

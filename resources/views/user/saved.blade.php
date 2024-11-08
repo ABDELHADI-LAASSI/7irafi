@@ -29,12 +29,12 @@
 @endsection
 
 <style>
- 
+
 
     .profile h2 {
         font-size: 28px;
         text-align: center;
-        margin-bottom: 20px;
+        margin-top: 20px;
         color: #2196f3;
     }
 

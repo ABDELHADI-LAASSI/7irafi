@@ -38,8 +38,9 @@
                                 <img src="{{ asset('images/profile_image.png') }}" alt="profile image"
                                     class="profile_image">
                             @endif
-                            <div class="text-center">
+                            <div >
                                 <p class="me-3">{{ Auth::user()->name }}</p>
+                                <p class="me-3 text-black-50">{{ Auth::user()->email }}</p>
                             </div>
 
 
@@ -47,13 +48,28 @@
                         </div>
                         <hr>
                         <ul class="sub-menu-link">
-                            <li class="d-flex   "><i class="fa-solid fa-user d-flex align-items-center"></i><a
-                                    href="{{ route('profile') }}" class="me-2">ملفى الشخصى</a> </li>
-                            <li class="d-flex   "><i class="fa-solid fa-bookmark d-flex align-items-center"><a
-                                        href="{{route('savedPosts')}}" class="me-2"> </i>المنشورات المحفوظة</a></li>
-                            <li class="d-flex   "><i class="fa-solid fa-right-from-bracket d-flex align-items-center "></i><a
-                                    href="{{ route('logout') }}" class="me-2">تسجيل الخروج</a></li>
+                            <li class="d-flex">
+                                <i class="fa-solid fa-user d-flex align-items-center"></i>
+                                <a href="{{ route('profile') }}" class="btn btn-link  text-decoration-none d-flex align-items-center">
+                                    ملفى الشخصى
+                                </a>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fa-solid fa-bookmark d-flex align-items-center"></i>
+                                <a href="{{ route('savedPosts') }}" class="btn btn-link  text-decoration-none d-flex align-items-center">
+                                    المنشورات المحفوظة
+                                </a>
+                            </li>
+                            <li class="d-flex">
+                                <form action="{{ route('logout') }}" method="POST" class="d-flex">
+                                    @csrf
+                                    <i class="fa-solid fa-right-from-bracket d-flex align-items-center"></i>
+                                    <button type="submit" class="btn btn-link text-decoration-none d-flex align-items-center">تسجيل الخروج</button>
+                                </form>
+                            </li>
                         </ul>
+
+
                     </div>
                 </div>
             </ul>

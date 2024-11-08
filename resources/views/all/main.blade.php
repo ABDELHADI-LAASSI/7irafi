@@ -12,7 +12,7 @@
                 <div class="hirafis">
                     @foreach ($hirafyiin as $hirafi)
                         <div class="hirafi">
-                            <a href="">
+                            <a href="{{route('user.show', $hirafi->id)}}">
                                     <img src="{{ $hirafi->infos->image }}" alt="Hirafi Image">
                                     <h6>{{ $hirafi->name }}</h6>
                             </a>

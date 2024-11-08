@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="header" id="header">
     <div class="container">
         <img src="{{ asset('images/hirfa logo.png') }}" alt="logo" class="logo">
@@ -51,7 +50,6 @@
         @endauth
     </div>
 </div>
-
 
 <style>
     * {
@@ -115,17 +113,23 @@
         }
     }
 
-    .header {
-        box-shadow: 0px 0px 15px whitesmoke;
-        position: relative;
-        direction: rtl;
-    }
+            .header {
+                box-shadow: 0px 0px 15px whitesmoke;
+                position: relative;
+                direction: rtl;
+            }
+            @media (max-width: 768px) {
+                .header .containerNav {
 
-    .header .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
+                }
+            }
+
+            .header .containerNav {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                
+            }
 
     .header .container .logo {
         display: flex;
@@ -290,14 +294,9 @@
 
 
 
-    @media (max-width:767px) {}
-</style>
-<script>
-    function toggleMenu() {
-        var subMenu = document.getElementById("subMenu");
-        subMenu.classList.toggle("open-menu");
-    }
-</script>
-    
- </html>
+            @media (max-width:767px) {}
+        </style>
 
+
+
+    </html>

@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/comment/{post}', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
     Route::post('/save/{post}', [App\Http\Controllers\SaveController::class, 'post'])->name('save.post');
     Route::delete('/save/{post}', [App\Http\Controllers\SaveController::class, 'delete'])->name('save.delete');
+    Route::get('/user/{user}' , [App\Http\Controllers\User\UserController::class, 'show'])->name('user.show');
 });
 
 require __DIR__.'/auth.php';

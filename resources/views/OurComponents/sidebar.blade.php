@@ -6,7 +6,7 @@
         </a>
       </li>
       <li style="background-color: white; text-align: center; padding: 10px;">
-        <a href="#" class="nav-link link-dark">
+        <a href="{{route('user.hirafiChat' , $user->id)}}" class="nav-link link-dark">
           المحادتاث
         </a>
       </li>

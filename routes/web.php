@@ -79,6 +79,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{user}' , [App\Http\Controllers\User\UserController::class, 'show'])->name('user.show');
     Route::post('/user/rate/{user}/{hirafi}' , [App\Http\Controllers\RatingController::class, 'store'])->name('user.rate');
     Route::post('/user/rate/update/{user}/{hirafi}' , [App\Http\Controllers\RatingController::class, 'update'])->name('user.update');
+    Route::get('/user/{user}/chat' , [App\Http\Controllers\User\UserController::class, 'userHirafiChat'])->name('user.hirafiChat');
+    Route::post('/chat/{sender}/{recived}' , [App\Http\Controllers\ChatController::class, 'store'])->name('chat.store');
 });
+
 
 require __DIR__.'/auth.php';

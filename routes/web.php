@@ -77,6 +77,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/save/{post}', [App\Http\Controllers\SaveController::class, 'post'])->name('save.post');
     Route::delete('/save/{post}', [App\Http\Controllers\SaveController::class, 'delete'])->name('save.delete');
     Route::get('/user/{user}' , [App\Http\Controllers\User\UserController::class, 'show'])->name('user.show');
+    Route::post('/user/rate/{user}/{hirafi}' , [App\Http\Controllers\RatingController::class, 'store'])->name('user.rate');
+    Route::post('/user/rate/update/{user}/{hirafi}' , [App\Http\Controllers\RatingController::class, 'update'])->name('user.update');
 });
 
 require __DIR__.'/auth.php';

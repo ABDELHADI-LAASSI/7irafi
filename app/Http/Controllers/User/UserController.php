@@ -96,6 +96,27 @@ class UserController extends Controller
     }
 
     public function show(User $user){
-        return view('all.userInfo' , compact('user'));
+        $userId = Auth::user()->id;
+        $rates = $user->rates()->get();
+        $alreadyRated = false;
+
+        $score = 0;
+        foreach ($rates as $rate) {
+            $score += $rate->score;
+            if ($rate->user_id == $userId) {
+                $alreadyRated = true;
+            }
+        }
+
+        if (count($rates) > 0) {
+            $score = $score / $user->rates()->count();
+        }
+
+        $score = number_format($score, 2);
+
+        $user->rating = $score;
+
+        // dd($alreadyRated);
+        return view('all.userInfo' , compact('user' , 'alreadyRated'));
     }
 }

@@ -19,16 +19,18 @@
 
         <div class="grid-layout">
             @foreach ($hiraf as $item)
-                <div class="card">
-                    <div class="image d-flex flex-column justify-content-center align-items-center">
-                        <button class="btn btn-secondary">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" height="100" width="100" />
-                        </button>
-                        <span class="name mt-3">{{ $item->user->name }}</span>
-                        <span class="idd">الحرفة :{{ $item->hirfa }} </span>
-                        <button class="More">للمزيد من المعلومات</button>
+                <a href="{{route('user.show', $item->user->id)}}" style="text-decoration: none">
+                    <div class="card">
+                        <div class="image d-flex flex-column justify-content-center align-items-center">
+                            <button class="btn btn-secondary">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" height="100" width="100" />
+                            </button>
+                            <span class="name mt-3">{{ $item->user->name }}</span>
+                            <span class="idd">الحرفة :{{ $item->hirfa }} </span>
+                            <button class="More">للمزيد من المعلومات</button>
+                        </div>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
 

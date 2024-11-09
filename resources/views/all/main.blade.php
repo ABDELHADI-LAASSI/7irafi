@@ -98,7 +98,7 @@
                                     @foreach ($post->comments as $comment)
                                     <div class="comment">
                                         <div>
-                                            <a class="comment_head" href="">
+                                            <a class="comment_head" href="{{route('user.show', $comment->user->id)}}">
                                                 <h2>{{ $comment->user->name }}</h2>
                                                 @if ($comment->user->infos && $comment->user->infos->image)
                                                 <img src="{{ $comment->user->infos->image }}" alt="User Image">

@@ -14,7 +14,7 @@
 
     @include('OurComponents.navbar')
 
-    <div style="display: flex; justify-content: space-between">
+    <div style="display: flex; justify-content: space-between; flex-direction: row-reverse" >
         @include('OurComponents.sidebar')
 
         @yield('content')

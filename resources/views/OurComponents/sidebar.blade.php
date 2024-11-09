@@ -1,40 +1,37 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="fs-4">Sidebar</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-          Home
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; position: fixed; left: 0; top: 0; bottom: 0;">
+    <ul class="sidebar" style="height: 100%; display: flex; flex-direction: column; justify-content: center; row-gap: 6rem; list-style: none; padding: 0">
+      <li class="nav-item" style="background-color: white; text-align: center; padding: 10px;">
+        <a href="{{route('user.show', $user->id)}}" class="nav-link active" aria-current="page">
+          المعلومات الشخصية
         </a>
       </li>
-      <li>
+      <li style="background-color: white; text-align: center; padding: 10px;">
         <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-          Dashboard
+          المحادتاث
         </a>
       </li>
-      <li>
+      <li style="background-color: white; text-align: center; padding: 10px;">
         <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-          Orders
+          ارسال طلب عمل
         </a>
       </li>
-      <li>
+      <li style="background-color: white; text-align: center; padding: 10px;">
         <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-          Customers
+          الدفع
         </a>
       </li>
     </ul>
 
   </div>
+
+
+  <style>
+
+    .sidebar li {
+      transition: .3s;
+    }
+
+    .sidebar li:hover {
+      border-radius: 10px;
+    }
+  </style>

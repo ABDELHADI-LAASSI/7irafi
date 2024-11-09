@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -118,5 +119,24 @@ class UserController extends Controller
 
         // dd($alreadyRated);
         return view('all.userInfo' , compact('user' , 'alreadyRated'));
+    }
+
+
+    public function userHirafiChat(User $user) {
+        $userId = Auth::user()->id;
+        $hirafiId = $user->id;
+
+        $chat = Chat::where(function($query) use ($userId, $hirafiId) {
+            $query->where('sender_id', $userId)
+                  ->where('receiver_id', $hirafiId);
+        })->orWhere(function($query) use ($userId, $hirafiId) {
+            $query->where('sender_id', $hirafiId)
+                  ->where('receiver_id', $userId);
+        })->orderBy('timestamp', 'asc') // Order messages by timestamp (oldest first)
+        ->get();
+
+        
+        
+        return view('all.userInfoChat' , compact('user' , 'chat' , 'hirafiId' , 'userId'));
     }
 }

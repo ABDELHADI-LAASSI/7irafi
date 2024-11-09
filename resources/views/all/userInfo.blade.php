@@ -88,7 +88,7 @@
     <style>
         .userInfo {
             padding: 2rem;
-            width: calc(100% - 250px);
+            width: calc(100% - 280px);
             direction: rtl;
         }
 

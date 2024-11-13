@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\WebController;
+use App\Http\Controllers\SaveController;
+use App\Http\Controllers\PostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile', [UserController::class, 'update'])->name('profile.updateInfo');
     Route::post('/profile/changePassword', [UserController::class, 'updatePassword'])->name('profile.updatePassword');
     Route::delete('profile' , [UserController::class, 'removeAccount'])->name('profile.deleteProfile');
+    Route::get('Saved_Posts' , [SaveController::class, 'index'])->name('savedPosts');
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -81,7 +85,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/rate/update/{user}/{hirafi}' , [App\Http\Controllers\RatingController::class, 'update'])->name('user.update');
     Route::get('/user/{user}/chat' , [App\Http\Controllers\User\UserController::class, 'userHirafiChat'])->name('user.hirafiChat');
     Route::post('/chat/{sender}/{recived}' , [App\Http\Controllers\ChatController::class, 'store'])->name('chat.store');
+    Route::get('/Saved_Posts' , [App\Http\Controllers\SaveController::class, 'index'])->name('savedPosts');
+    Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
 });
+
 
 
 require __DIR__.'/auth.php';

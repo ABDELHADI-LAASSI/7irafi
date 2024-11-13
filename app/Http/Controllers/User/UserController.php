@@ -30,8 +30,6 @@ class UserController extends Controller
             'availability' => 'string|max:255|nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
         ]);
-        
-        // dd($request->all());
 
         $user = auth()->user();
 
@@ -93,7 +91,6 @@ class UserController extends Controller
 
         return Redirect::to('/');
 
-        
     }
 
     public function show(User $user){
@@ -135,8 +132,9 @@ class UserController extends Controller
         })->orderBy('timestamp', 'asc') // Order messages by timestamp (oldest first)
         ->get();
 
-        
-        
+
+
         return view('all.userInfoChat' , compact('user' , 'chat' , 'hirafiId' , 'userId'));
+
     }
 }

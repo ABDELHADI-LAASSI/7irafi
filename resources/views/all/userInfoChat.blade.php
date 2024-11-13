@@ -24,7 +24,7 @@
                     @endif
                 @endforeach
             </div>
-            <div class="conversation_footer">
+            <div class="conversation_footer" >
                 <form action="{{ route('chat.store', ['sender' => Auth::user()->id, 'recived' => $user->id]) }}" method="POST">
                     @csrf
                     <input type="text" name="message" placeholder="Type a message" />

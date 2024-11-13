@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
 {
+
     public function store(Request $request ,User $user , User $hirafi) {
         $request->validate([
             'score' => 'required|integer|min:0|max:5',
@@ -33,4 +33,5 @@ class RatingController extends Controller
 
         return redirect()->back()->with('success' , 'You rated this hirafi');
     }
+
 }

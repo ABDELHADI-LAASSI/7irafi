@@ -3,116 +3,70 @@
 @section('title', 'Saved Posts')
 
 @section('content')
-
-<div class="container">
-    <div class="profile">
-        <h2>Saved Posts</h2>
-    </div>
-    <div class="posts">
-        @foreach ($posts as $post)
-            <div class="post">
-                <img src="{{ $post->image }}" alt="Post Image" />
-                <div class="post_body">
-                    <h3>{{ $post->title }}</h3>
-                    <p>{{ $post->description }}</p>
-                </div>
-                <div class="post_footer">
-                    <div class="post_infos">
-                        <p>{{ $post->created_at->diffForHumans() }}</p>
+    <div class="container mt-5">
+        <div class="profile">
+            <h2 class="text-center mb-4">المنشورات المحفوظة</h2>
+        </div>
+        <div class="row">
+            @foreach ($posts as $post)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="post card shadow-sm h-100">
+                        <div class="post_body d-flex align-items-start p-3">
+                            <img src="{{ $post->image }}" alt="Post Image" class="img-fluid me-3" style="width: 60px; height: 60px;">
+                            <div class="post_description">
+                                <p class="text-muted small">{{ \Illuminate\Support\Str::limit($post->description, 80) }}</p>
+                            </div>
+                        </div>
+                        <div class="post_footer bg-light p-2 d-flex justify-content-between align-items-center">
+                            <p class="text-secondary small mb-0">{{ $post->user->name }} :منشور بواسطة</p>
+                            <a href="{{ route('post.show', $post->id) }}" class="btn btn-primary btn-sm">مشاهدة المنشور</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-</div>
-
 @endsection
 
 <style>
-
-
-    .profile h2 {
-        font-size: 28px;
-        text-align: center;
-        margin-top: 20px;
-        color: #2196f3;
+    .container {
+        max-width: 800px;
+        margin: auto;
     }
 
-    /* Posts Grid */
-    .posts {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .post.card {
+        height: 250px; /* Sets a fixed height for all cards */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        transition: box-shadow 0.3s ease;
     }
 
-    /* Post Card */
-    .post {
-        background: #f8f9fa;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .post:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .post img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-bottom: 2px solid #2196f3;
+    .post.card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .post_body {
-        padding: 15px;
+        display: flex;
+        align-items: center;
     }
 
-    .post_body h3 {
-        font-size: 22px;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .post_body p {
-        font-size: 16px;
-        color: #555;
+    .post_description p {
+        font-size: 0.9rem;
+        color: #666;
+        max-height: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .post_footer {
-        padding: 15px;
-        background: #f1f1f1;
-        border-top: 1px solid #ddd;
-        text-align: right;
+        border-top: 1px solid #f0f0f0;
     }
 
-    .post_infos p {
-        font-size: 14px;
-        color: #888;
-    }
-
-    /* Responsive Design */
-    @media (min-width: 600px) {
-        .posts {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-
-    @media (min-width: 900px) {
-        .posts {
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .post_body h3 {
-            font-size: 18px;
-        }
-
-        .post_body p {
-            font-size: 14px;
-        }
+    .btn-primary {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
     }
 </style>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,8 +30,6 @@ class UserController extends Controller
             'availability' => 'string|max:255|nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
         ]);
-
-        // dd($request->all());
 
         $user = auth()->user();
 
@@ -91,6 +91,50 @@ class UserController extends Controller
 
         return Redirect::to('/');
 
+    }
+
+    public function show(User $user){
+        $userId = Auth::user()->id;
+        $rates = $user->rates()->get();
+        $alreadyRated = false;
+
+        $score = 0;
+        foreach ($rates as $rate) {
+            $score += $rate->score;
+            if ($rate->user_id == $userId) {
+                $alreadyRated = true;
+            }
+        }
+
+        if (count($rates) > 0) {
+            $score = $score / $user->rates()->count();
+        }
+
+        $score = number_format($score, 2);
+
+        $user->rating = $score;
+
+        // dd($alreadyRated);
+        return view('all.userInfo' , compact('user' , 'alreadyRated'));
+    }
+
+
+    public function userHirafiChat(User $user) {
+        $userId = Auth::user()->id;
+        $hirafiId = $user->id;
+
+        $chat = Chat::where(function($query) use ($userId, $hirafiId) {
+            $query->where('sender_id', $userId)
+                  ->where('receiver_id', $hirafiId);
+        })->orWhere(function($query) use ($userId, $hirafiId) {
+            $query->where('sender_id', $hirafiId)
+                  ->where('receiver_id', $userId);
+        })->orderBy('timestamp', 'asc') // Order messages by timestamp (oldest first)
+        ->get();
+
+
+
+        return view('all.userInfoChat' , compact('user' , 'chat' , 'hirafiId' , 'userId'));
 
     }
 }

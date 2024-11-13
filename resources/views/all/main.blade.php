@@ -7,15 +7,19 @@
         <div class="acceuil_content">
 
             <div class="hirafyin">
-                <h1 >الحرفيين</h1>
+                <h1>الحرفيين</h1>
 
                 <div class="hirafis">
                     @foreach ($hirafyiin as $hirafi)
                         <div class="hirafi">
+
                             <a href="">
+
+                                <a href="{{ route('user.show', $hirafi->id) }}">
+
                                     <img src="{{ $hirafi->infos->image }}" alt="Hirafi Image">
                                     <h6>{{ $hirafi->name }}</h6>
-                            </a>
+                                </a>
                         </div>
                     @endforeach
                 </div>
@@ -24,14 +28,13 @@
             <div class="posts">
 
                 @foreach ($posts as $post)
-
                     <div class="post">
 
                         <div class="post_head">
                             <div class="post_user">
                                 <div>
                                     <h2>{{ $post->user->name }}</h2>
-                                    <p> {{$post->posted_at}} </p>
+                                    <p> {{ $post->posted_at }} </p>
                                 </div>
                                 @if ($post->user->infos && $post->user->infos->image)
                                     <img src="{{ $post->user->infos->image }}" alt="User Image">
@@ -39,18 +42,18 @@
                             </div>
                             <div class="post_action">
                                 @auth
-                                @if (!$post->savedByUsers->contains('id', auth()->id()))
-                                <form action="{{ route('save.post', ['post' => $post->id]) }}" method="POST">
-                                    @csrf
-                                    <button>حفظ</button>
-                                </form>
-                            @else
-                                <form action="{{ route('save.delete', ['post' => $post->id]) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button>إزالة من المحفوظات</button>
-                                </form>
-                            @endif
+                                    @if (!$post->savedByUsers->contains('id', auth()->id()))
+                                        <form action="{{ route('save.post', ['post' => $post->id]) }}" method="POST">
+                                            @csrf
+                                            <button>حفظ</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('save.delete', ['post' => $post->id]) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button>إزالة من المحفوظات</button>
+                                        </form>
+                                    @endif
 
                                 @endauth
                             </div>
@@ -60,7 +63,8 @@
                         <div class="post_body">
                             <p>{{ $post->description }}</p>
                             {{-- <img src="{{ $post->image }}" alt="{{ $post->title }}"> --}}
-                            <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" alt="">
+                            <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
+                                alt="">
                         </div>
 
                         <div class="post_footer">
@@ -70,12 +74,16 @@
 
                                     @auth
                                         @if ($post->liked == false)
-                                            <form action="{{ route('like.post', ['post' => $post->id, 'user' => auth()->user()->id]) }}" method="POST">
+                                            <form
+                                                action="{{ route('like.post', ['post' => $post->id, 'user' => auth()->user()->id]) }}"
+                                                method="POST">
                                                 @csrf
                                                 <button>اعجاب</button>
                                             </form>
                                         @else
-                                            <form action="{{ route('like.delete', ['post' => $post->id, 'user' => auth()->user()->id]) }}" method="POST">
+                                            <form
+                                                action="{{ route('like.delete', ['post' => $post->id, 'user' => auth()->user()->id]) }}"
+                                                method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button>ازالة الاعجاب</button>
@@ -85,7 +93,7 @@
                                     @endauth
 
                                 </div>
-                                <p>{{ $post->comments->count() }} تعليق</p>
+                                <p>{{ $post->comments->count() }} تعاليق</p>
                             </div>
 
                             <div class="post_buttons">
@@ -96,23 +104,29 @@
 
                                 <div class="comments_list">
                                     @foreach ($post->comments as $comment)
-                                    <div class="comment">
-                                        <div>
-                                            <a class="comment_head" href="">
-                                                <h2>{{ $comment->user->name }}</h2>
-                                                @if ($comment->user->infos && $comment->user->infos->image)
-                                                <img src="{{ $comment->user->infos->image }}" alt="User Image">
-                                                @endif
-                                            </a>
-                                        </div>
-                                        <div class="comment_body">
-                                            <p>{{ $comment->content }}</p>
-                                        </div>
+                                        <div class="comment">
+                                            <div>
 
-                                    </div>
+                                                <a class="comment_head" href="">
+
+                                                    <a class="comment_head"
+                                                        href="{{ route('user.show', $comment->user->id) }}">
+
+                                                        <h2>{{ $comment->user->name }}</h2>
+                                                        @if ($comment->user->infos && $comment->user->infos->image)
+                                                            <img src="{{ $comment->user->infos->image }}" alt="User Image">
+                                                        @endif
+                                                    </a>
+                                            </div>
+                                            <div class="comment_body">
+                                                <p>{{ $comment->content }}</p>
+                                            </div>
+
+                                        </div>
                                     @endforeach
                                 </div>
-                                <form method="POST" action="{{ route('comment.store', ['post' => $post->id]) }}" class="comment_form">
+                                <form method="POST" action="{{ route('comment.store', ['post' => $post->id]) }}"
+                                    class="comment_form">
                                     @csrf
                                     <button>اضافة تعليق</button>
                                     <input name="content" type="text">
@@ -123,7 +137,6 @@
                         </div>
 
                     </div>
-
                 @endforeach
 
             </div>
@@ -151,15 +164,16 @@
         p {
             margin: 0
         }
+
         .acceuil_content {
             margin-top: 3rem;
             display: grid;
             grid-template-columns: 1fr 740px 1fr;
             column-gap: 2rem
-
         }
 
-        .hirafyin , .side_links {
+        .hirafyin,
+        .side_links {
             background: #f5f5f5;
             padding: 1rem;
             border-radius: 10px;
@@ -174,7 +188,7 @@
             margin-bottom: 2rem;
         }
 
-        .hirafyin .hirafis{
+        .hirafyin .hirafis {
             display: grid;
             row-gap: 2rem
         }
@@ -192,7 +206,6 @@
             flex-direction: column;
             align-items: center;
             row-gap: 1rem
-
         }
 
         .hirafyin .hirafis .hirafi img {
@@ -222,6 +235,7 @@
             text-decoration: none;
             color: black
         }
+
         .posts {
             display: flex;
             flex-direction: column;
@@ -294,7 +308,6 @@
             display: grid;
             grid-template-columns: 1fr;
             margin-top: 1rem
-
         }
 
         .posts .post .post_footer .post_buttons button {
@@ -322,15 +335,18 @@
             flex-direction: row-reverse;
             justify-content: start;
         }
+
         .posts .post .post_footer .comments .comment .comment_head h2 {
             margin: 0;
             font-size: 14px;
         }
+
         .posts .post .post_footer .comments .comment .comment_head img {
             width: 30px;
             height: 30px;
             border-radius: 50%;
         }
+
         .posts .post .post_footer .comments .comment .comment_body {
             background: white;
             display: flex;
@@ -345,6 +361,7 @@
             display: flex;
             column-gap: 1rem;
         }
+
         .comment_form button {
             padding: .2rem 1rem;
         }

@@ -6,6 +6,8 @@ use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\WebController;
 use App\Http\Controllers\SaveController;
+use App\Http\Controllers\PostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +80,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/comment/{post}', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
     Route::post('/save/{post}', [App\Http\Controllers\SaveController::class, 'post'])->name('save.post');
     Route::delete('/save/{post}', [App\Http\Controllers\SaveController::class, 'delete'])->name('save.delete');
+    Route::get('/user/{user}' , [App\Http\Controllers\User\UserController::class, 'show'])->name('user.show');
+    Route::post('/user/rate/{user}/{hirafi}' , [App\Http\Controllers\RatingController::class, 'store'])->name('user.rate');
+    Route::post('/user/rate/update/{user}/{hirafi}' , [App\Http\Controllers\RatingController::class, 'update'])->name('user.update');
+    Route::get('/user/{user}/chat' , [App\Http\Controllers\User\UserController::class, 'userHirafiChat'])->name('user.hirafiChat');
+    Route::post('/chat/{sender}/{recived}' , [App\Http\Controllers\ChatController::class, 'store'])->name('chat.store');
+    Route::get('/Saved_Posts' , [App\Http\Controllers\SaveController::class, 'index'])->name('savedPosts');
+    Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
 });
+
+
 
 require __DIR__.'/auth.php';

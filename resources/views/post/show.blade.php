@@ -11,9 +11,9 @@
                 <div class="post_user">
                     <div class="d-flex align-items-center" >
                         @if ($post->user->infos && $post->user->infos->image)
-                            <img src="{{ $post->user->infos->image }}" alt="User Image">
+                            <img src="{{ asset('storage/' . $post->user->infos->image )}}" alt="User Image">
                         @else
-                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User Image">
+                            <img src={{asset('images/profile_image.png')}} alt="User Image">
                         @endif
                         <h2 class="ms-2">{{ $post->user->name }}</h2>
 
@@ -44,9 +44,14 @@
 
             <div class="post_body">
                 <p>{{ $post->description }}</p>
-                <img src="{{ $post->image }}" alt="{{ $post->title }}">
-                {{-- <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
-                    alt=""> --}}
+                {{-- @if ( $post->image)
+                 <img src="{{ $post->image }}" alt="{{ $post->title }}">
+                 @else --}}
+                  <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
+                    alt="">
+
+
+
             </div>
 
             <div class="post_footer">

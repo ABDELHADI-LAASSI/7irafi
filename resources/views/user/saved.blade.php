@@ -12,7 +12,8 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="post card shadow-sm h-100">
                         <div class="post_body d-flex align-items-start p-3">
-                            <img src="{{ $post->image }}" alt="Post Image" class="img-fluid me-3" style="width: 60px; height: 60px;">
+                            {{-- <img src="{{ $post->image }}" alt="Post Image" class="img-fluid me-3" style="width: 60px; height: 60px;"> --}}
+                            <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" alt="Post Image" class="img-fluid me-3" style="width: 60px; height: 60px;">
                             <div class="post_description">
                                 <p class="text-muted small">{{ \Illuminate\Support\Str::limit($post->description, 80) }}</p>
                             </div>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\WebController;
 use App\Http\Controllers\SaveController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ChatController;
 
 
 /*
@@ -53,6 +54,8 @@ Route::middleware(['auth' , 'role:hirafi'])->group(function () {
     Route::name('hirafi.')->group(function () {
         Route::prefix('hirafi')->group(function () {
             Route::get('index',[App\Http\Controllers\Hirafi\HirafiController::class, 'index'] )->name('index');
+            Route::get('messages', [App\Http\Controllers\Hirafi\HirafiController::class, 'listHirafiMessages'])->name('messages.list');
+            Route::get('chat/{id}', [App\Http\Controllers\Hirafi\HirafiController::class, 'showConversation'])->name('chat');
         });
     });
 });
@@ -61,6 +64,12 @@ Route::middleware(['auth' , 'role:user'])->group(function () {
     Route::name('user.')->group(function () {
         Route::prefix('user')->group(function () {
             Route::get('index',[App\Http\Controllers\User\UserController::class, 'index'] )->name('index');
+            Route::get('messages', [ChatController::class, 'listUserMessages'])->name('messages.list');
+            Route::get('chat/{id}', [ChatController::class, 'showConversation'])->name('chat');
+            Route::post('/chat/{id}/send', [ChatController::class, 'sendMessage'])->name('sendMessage');
+
+
+
         });
     });
 });
@@ -71,6 +80,7 @@ Route::prefix('/')->group(function () {
     Route::get('hirafiyine', [mainController::class, 'getHirafiyine'])->name('hirafiyine');
     Route::get('user', function () { return view('user.index'); })->name('user.main');
     Route::get('dashboard' , [MainController::class, 'sendUserToDashboard'])->name('dashboard');
+
 });
 
 

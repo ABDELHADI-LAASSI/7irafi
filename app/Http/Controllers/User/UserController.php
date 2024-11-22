@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.main');
+        return view('user.index');
     }
 
     public function update(Request $request){
@@ -115,7 +115,7 @@ class UserController extends Controller
         $user->rating = $score;
 
         // dd($alreadyRated);
-        return view('all.userInfo' , compact('user' , 'alreadyRated'));
+        return view('all.userInfo ' , compact('user','alreadyRated'));
     }
 
 

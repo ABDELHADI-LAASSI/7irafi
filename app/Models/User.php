@@ -79,8 +79,20 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
     public function additionalInfos()
-{
-    return $this->hasMany(AdditionalInfo::class);
-}
+    {
+        return $this->hasMany(AdditionalInfo::class);
+    }
+    public function sentMessages()
+    {
+        return $this->hasMany(Chat::class, 'sender_id');
+    }
+
+    /**
+     * Get all messages received by the user.
+     */
+    public function receivedMessages()
+    {
+        return $this->hasMany(Chat::class, 'receiver_id');
+    }
 
 }

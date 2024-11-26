@@ -97,6 +97,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/chat/{sender}/{recived}' , [App\Http\Controllers\ChatController::class, 'store'])->name('chat.store');
     Route::get('/Saved_Posts' , [App\Http\Controllers\SaveController::class, 'index'])->name('savedPosts');
     Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+    Route::get('/user/{user}/workRequest' , [App\Http\Controllers\User\UserController::class, 'get_workRequest'])->name('user.workRequest');
+    Route::post('/user/{user}/sendWorkRequest' , [App\Http\Controllers\User\UserController::class, 'sendWorkRequest'])->name('user.sendWorkRequest');
+    Route::delete('/user/{requestWork}/deleteWorkRequest' , [App\Http\Controllers\User\UserController::class, 'deleteWorkRequest'])->name('user.deleteWorkRequest');
 
 });
 

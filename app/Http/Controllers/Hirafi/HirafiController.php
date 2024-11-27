@@ -12,45 +12,53 @@ use App\Models\User;
 
 class HirafiController extends Controller
 {
+
     public function index()
     {
-        return view('hirafi.index');
+        $authUserId = Auth::id();
+
+        // Fetch users you've talked with
+        $users = User::whereHas('sentMessages', function ($query) use ($authUserId) {
+            $query->where('receiver_id', $authUserId);
+        })->orWhereHas('receivedMessages', function ($query) use ($authUserId) {
+            $query->where('sender_id', $authUserId);
+        })->get();
+
+        return view('hirafi.index', compact('users'));
     }
-    public function listHirafiMessages()
+
+    public function getMessages($userId)
     {
-        $hirafiId = Auth::id();
+        $authUserId = Auth::id();
 
-        // Fetch the last message for each conversation
-        $conversations = Chat::where('sender_id', $hirafiId)
-            ->orWhere('receiver_id', $hirafiId)
-            ->with(['sender', 'receiver'])
-            ->get()
-            ->groupBy(function ($chat) use ($hirafiId) {
-                return $chat->sender_id === $hirafiId ? $chat->receiver_id : $chat->sender_id;
-            })
-            ->map(function ($messages) {
-                // Get the last message in each conversation
-                return $messages->sortByDesc('created_at')->first();
-            });
+        // Fetch messages between logged-in user and the selected user
+        $messages = Chat::where(function ($query) use ($authUserId, $userId) {
+            $query->where('sender_id', $authUserId)
+                  ->where('receiver_id', $userId);
+        })->orWhere(function ($query) use ($authUserId, $userId) {
+            $query->where('sender_id', $userId)
+                  ->where('receiver_id', $authUserId);
+        })->orderBy('created_at', 'asc')->get();
 
-        return view('hirafi.chats', compact('conversations'));
+        return response()->json([
+            'html' => view('hirafi.partials.messages', compact('messages'))->render(),
+        ]);
     }
-    public function showConversation($id)
-    {
-        $hirafiId = Auth::id();
 
-        // Fetch all messages between the authenticated user and the selected user
-        $messages = Chat::where(function ($query) use ($hirafiId, $id) {
-            $query->where('sender_id', $hirafiId)
-                  ->where('receiver_id', $id);
-        })->orWhere(function ($query) use ($hirafiId, $id) {
-            $query->where('sender_id', $id)
-                  ->where('receiver_id', $hirafiId);
-        })->orderBy('created_at', 'asc')
-          ->get();
+    public function sendMessage(Request $request)
+{
+    $request->validate([
+        'receiver_id' => 'required|exists:users,id',
+        'message' => 'required|string',
+    ]);
 
-        $otherUser = User::findOrFail($id);
+    Chat::create([
+        'sender_id' => Auth::id(),
+        'receiver_id' => $request->receiver_id,
+        'message' => $request->message,
+    ]);
 
-        return view('hirafi.conversation', compact('messages', 'otherUser'));
-    }
+    return response()->json(['success' => true, 'message' => 'Message sent!']);
+}
+
 }

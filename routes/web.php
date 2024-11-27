@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\WebController;
 use App\Http\Controllers\SaveController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\hirafi\HirafiController;
 
 
 /*
@@ -53,9 +54,9 @@ Route::middleware(['auth' , 'role:admin'])->group(function () {
 Route::middleware(['auth' , 'role:hirafi'])->group(function () {
     Route::name('hirafi.')->group(function () {
         Route::prefix('hirafi')->group(function () {
-            Route::get('index',[App\Http\Controllers\Hirafi\HirafiController::class, 'index'] )->name('index');
-            Route::get('messages', [App\Http\Controllers\Hirafi\HirafiController::class, 'listHirafiMessages'])->name('messages.list');
-            Route::get('chat/{id}', [App\Http\Controllers\Hirafi\HirafiController::class, 'showConversation'])->name('chat');
+            Route::get('/users', [HirafiController::class, 'index'])->name('index');
+            Route::get('/messages/{hirafiId}', [HirafiController::class, 'getMessages']);
+            Route::post('/send-message', [HirafiController::class, 'sendMessage'])->name('sendMessage');
         });
     });
 });
@@ -97,9 +98,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/chat/{sender}/{recived}' , [App\Http\Controllers\ChatController::class, 'store'])->name('chat.store');
     Route::get('/Saved_Posts' , [App\Http\Controllers\SaveController::class, 'index'])->name('savedPosts');
     Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+    Route::get('/conversations/{id}/messages', [ChatController::class, 'fetchMessages'])->name('chat.fetchMessages');
+    Route::post('/messages', [ChatController::class, 'sendMessage'])->name('chat.sendMessage');
+
+
     Route::get('/user/{user}/workRequest' , [App\Http\Controllers\User\UserController::class, 'get_workRequest'])->name('user.workRequest');
     Route::post('/user/{user}/sendWorkRequest' , [App\Http\Controllers\User\UserController::class, 'sendWorkRequest'])->name('user.sendWorkRequest');
     Route::delete('/user/{requestWork}/deleteWorkRequest' , [App\Http\Controllers\User\UserController::class, 'deleteWorkRequest'])->name('user.deleteWorkRequest');
+
 
 });
 

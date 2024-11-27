@@ -102,6 +102,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/messages', [ChatController::class, 'sendMessage'])->name('chat.sendMessage');
 
 
+    Route::get('/user/{user}/workRequest' , [App\Http\Controllers\User\UserController::class, 'get_workRequest'])->name('user.workRequest');
+    Route::post('/user/{user}/sendWorkRequest' , [App\Http\Controllers\User\UserController::class, 'sendWorkRequest'])->name('user.sendWorkRequest');
+    Route::delete('/user/{requestWork}/deleteWorkRequest' , [App\Http\Controllers\User\UserController::class, 'deleteWorkRequest'])->name('user.deleteWorkRequest');
+
+
 });
 
 

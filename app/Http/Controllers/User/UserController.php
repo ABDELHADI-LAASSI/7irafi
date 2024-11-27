@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
+use App\Models\RequestWork;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -136,5 +137,35 @@ class UserController extends Controller
 
         return view('all.userInfoChat' , compact('user' , 'chat' , 'hirafiId' , 'userId'));
 
+    }
+
+    public function get_workRequest(User $user){
+
+        $requests = RequestWork::where('hirafi_id' , $user->id)->where('user_id' , auth()->user()->id)->get();
+
+
+        return view('all.workRequest' , compact('user' , 'requests'));
+    }
+
+    public function sendWorkRequest(Request $request , User $user){
+        $request->validate([
+            'description' => 'required|string|max:255',
+        ]);
+
+        RequestWork::create([
+            'user_id' => auth()->user()->id,
+            'hirafi_id' => $user->id,
+            'description' => $request->description,
+            'status' => 'pending'
+        ]);
+
+        return back()->with('success', 'Work request sent successfully');
+    }
+
+    public function deleteWorkRequest(RequestWork $requestWork){
+
+        $requestWork->delete();
+
+        return back()->with('success', 'Work request deleted successfully');
     }
 }
